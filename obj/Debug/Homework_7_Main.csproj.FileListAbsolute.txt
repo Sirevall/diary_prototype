@@ -1,0 +1,10 @@
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\bin\Debug\Homework_7_Main.exe.config
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\bin\Debug\Homework_7_Main.exe
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\bin\Debug\Homework_7_Main.pdb
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\bin\Debug\Newtonsoft.Json.dll
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\bin\Debug\Newtonsoft.Json.xml
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\obj\Debug\Homework_7_Main.csproj.CoreCompileInputs.cache
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\obj\Debug\Homework_7_Main.csproj.CopyComplete
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\obj\Debug\Homework_7_Main.exe
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\obj\Debug\Homework_7_Main.pdb
+D:\repositories\Мои решения работ\Homework\Homework_7_Main\obj\Debug\Homework_7_Main.csprojAssemblyReference.cache
