@@ -19,9 +19,9 @@ namespace Diary_prototype
         {
             Diary diary = new Diary();
 
-            List<Note> Notes = new List<Note>();
+            List<Note> notes = new List<Note>();
 
-            Notes = file.ReadFile(Notes);
+            notes = file.ReadFile(notes);
 
             while (true)
             {
@@ -32,32 +32,32 @@ namespace Diary_prototype
                     $"\n7 - Выйти");
                 Console.Write("\nОтвет - ");
 
-                string answer = Console.ReadKey().KeyChar.ToString();
+                string answerUser = Console.ReadKey().KeyChar.ToString();
                 Console.WriteLine();
 
-                switch (answer)
+                switch (answerUser)
                 {
                     case "1":
-                        diary.Print(Notes);
+                        diary.Print(notes);
                         break;
                     case "2":
-                        diary.Add(Notes);
+                        diary.Add(notes);
                         break;
                     case "3":
-                        diary.RemoveNote(Notes);
+                        diary.RemoveNote(notes);
                         break;
                     case "4":
-                        diary.Edit(Notes);
+                        diary.Edit(notes);
                         break;
                     case "5":
-                        diary.Sort(Notes);
+                        diary.Sort(notes);
                         break;
                     case "6":
-                        diary.PrintToSpecialDate(Notes);
+                        diary.PrintToSpecialDate(notes);
                         break;
                     case "7":
-                        Notes.Sort((a, b) => a.NoteNumber.CompareTo(b.NoteNumber));
-                        file.WriteFile(Notes);
+                        notes.Sort((a, b) => a.NoteNumber.CompareTo(b.NoteNumber));
+                        file.WriteFile(notes);
                         Environment.Exit(-1);
                         break;
                     default:
