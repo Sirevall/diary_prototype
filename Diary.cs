@@ -10,34 +10,34 @@ namespace Diary_prototype
 {
     class Diary
     {
-        public void Add(List<Note> Notes)
+        public void Add(List<Note> notes)
         {
             DateTime time = new DateTime();
 
             time = DateTime.Now;
 
-            int ID;
-            if (Notes.Count != 0) ID = Notes.Max(e => e.NoteNumber) + 1;
-            else ID = 1;
-            
+            int id;
+            if (notes.Count != 0)
+                id = notes.Max(e => e.NoteNumber) + 1;
+            else id = 1;
+
 
             Console.Write("\nВведите текст заметки: ");
-            string Text = Console.ReadLine();
+            string text = Console.ReadLine();
             Console.WriteLine();
 
             Console.Write("Введите место: ");
-            string Place = Console.ReadLine();
+            string place = Console.ReadLine();
             Console.WriteLine();
 
             Console.Write("Сделана ли задача?\n1 - да  2 - нет\nОтвет - ");
-            string Status = Console.ReadKey().KeyChar.ToString() == "1"? "Выполнено" : "Не выполнено";
+            string status = Console.ReadKey().KeyChar.ToString() == "1" ? "Выполнено" : "Не выполнено";
             Console.WriteLine();
 
-            Notes.Add(new Note(ID, time, Text, Place, Status));
+            notes.Add(new Note(id, time, text, place, status));
             Console.WriteLine();
         }
-
-        public void RemoveNote(List<Note> Notes)
+        public void RemoveNote(List<Note> notes)
         {
             Console.Write("По какому столбцу хотите выполнить удаление?" +
                 "\n1 - номер заметки" +
@@ -49,88 +49,87 @@ namespace Diary_prototype
             string DeleteMode = Console.ReadKey().KeyChar.ToString();
             Console.WriteLine();
 
-            string AnswerUser;
+            string answerUser;
+
             switch (DeleteMode)
             {
                 case "1":
-                    int number = 0;
+                    int noteNumber = 0;
                     bool flag = false;
                     do
                     {
                         Console.Write("\nВведите номер заметки, который следует удалить: ");
-                        AnswerUser = Console.ReadLine();
+                        answerUser = Console.ReadLine();
                         Console.WriteLine();
-                        flag = int.TryParse(AnswerUser, out number);
-
+                        flag = int.TryParse(answerUser, out noteNumber);
                     } while (!flag);
-                    Notes.RemoveAll(e => e.NoteNumber == number);
+                    notes.RemoveAll(e => e.NoteNumber == noteNumber);
                     break;
                 case "2":
                     Console.Write("\nВведите дату и время, которые следует удалить в формате дд.мм.гггг чч:мм:сс: ");
-                    AnswerUser = Console.ReadLine();
+                    answerUser = Console.ReadLine();
                     Console.WriteLine();
-                    Notes.RemoveAll(e => e.RecordTime.ToString().Contains(AnswerUser) == true);
+                    notes.RemoveAll(e => e.RecordTime.ToString().Contains(answerUser) == true);
                     break;
                 case "3":
                     Console.WriteLine("\nКакие записи необходимо удалить?\n1 - выполненные\n2 - невыполненные");
                     Console.Write("Ответ - ");
-                    AnswerUser = Console.ReadKey().KeyChar.ToString() == "1" ? "Выполнено" : "Не выполнено";
-                    Notes.RemoveAll(e => e.Status == AnswerUser);
+                    answerUser = Console.ReadKey().KeyChar.ToString() == "1" ? "Выполнено" : "Не выполнено";
+                    notes.RemoveAll(e => e.Status == answerUser);
                     break;
                 case "4":
                     Console.Write("\nЗаписи из каких мест следует удалить?\nОтвет - ");
-                    AnswerUser = Console.ReadLine();
+                    answerUser = Console.ReadLine();
                     Console.WriteLine();
-                    Notes.RemoveAll(e => e.Place == AnswerUser);
+                    notes.RemoveAll(e => e.Place == answerUser);
                     break;
                 case "5":
                     Console.Write("\nЗаметки с каким содержанием хотите удалить?\nОтвет - ");
-                    AnswerUser = Console.ReadLine();
+                    answerUser = Console.ReadLine();
                     Console.WriteLine();
-                    Notes.RemoveAll(e => e.Text == AnswerUser);
+                    notes.RemoveAll(e => e.Text == answerUser);
                     break;
-                default: Console.WriteLine("\nНичего не было сделано, так как не был введен корректный ответ"); break;
+                default:
+                    Console.WriteLine("\nНичего не было сделано, так как не был введен корректный ответ");
+                    break;
             }
         }
-
-        public void Print(List<Note> Notes)
+        public void Print(List<Note> notes)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"\n{"№",-5} {"Время записи:",-20} {"Статус:",-14} {"Место создания:",-18} {"Содержание заметки:"}\n");
             Console.ResetColor();
 
-            foreach (var note in Notes)
+            foreach (var note in notes)
             {
                 Console.WriteLine($"{note.NoteNumber,-5} {note.RecordTime,-20} {note.Status,-14} {note.Place,-18} {note.Text}");
             }
             Console.WriteLine();
         }
-
-        public void Edit(List<Note> Notes)
+        public void Edit(List<Note> notes)
         {
-            int number = 0;
+            int noteNumber = 0;
             bool flag = false;
             do
             {
                 Console.Write("\nВведите номер заметки, которую следует редактировать: ");
-                string AnswerUser = Console.ReadLine();
+                string answerUser = Console.ReadLine();
                 Console.WriteLine();
-                flag = int.TryParse(AnswerUser, out number);
+                flag = int.TryParse(answerUser, out noteNumber);
 
             } while (!flag);
 
-            bool Exist = false;
+            bool noteExistInList = false;
 
-            foreach (var note in Notes)
+            foreach (var note in notes)
             {
-                if (note.NoteNumber == number)
+                if (note.NoteNumber == noteNumber)
                 {
-                    Exist = true;
+                    noteExistInList = true;
                     break;
                 }
             }
-
-            if (Exist)
+            if (noteExistInList)
             {
 
                 Console.Write("\nВведите текст заметки: ");
@@ -145,12 +144,11 @@ namespace Diary_prototype
                 string Status = Console.ReadKey().KeyChar.ToString() == "1" ? "Выполнено" : "Не выполнено";
                 Console.WriteLine();
 
-                Notes.FindAll(e => e.NoteNumber == number).ForEach(x => { x.Text = Text; x.Place = Place; x.Status = Status; });
+                notes.FindAll(e => e.NoteNumber == noteNumber).ForEach(x => { x.Text = Text; x.Place = Place; x.Status = Status; });
             }
             else Console.WriteLine("\nЗаметки под таким номером не существует\n");
         }
-
-        public void Sort(List<Note> Notes, string SortMode = "1")
+        public void Sort(List<Note> notes, string sortMode = "1")
         {
             Console.Write("По какому столбцу хотите выполнить сортировку?" +
                 "\n1 - номер заметки" +
@@ -159,77 +157,78 @@ namespace Diary_prototype
                 "\n4 - место создания" +
                 "\n5 - содержание" +
                 "\nОтвет - ");
-            SortMode = Console.ReadKey().KeyChar.ToString();
+            sortMode = Console.ReadKey().KeyChar.ToString();
             Console.WriteLine("\n");
-            switch (SortMode)
+
+            switch (sortMode)
             {
                 case "1":
-                    Notes.Sort((a, b) => a.NoteNumber.CompareTo(b.NoteNumber));
+                    notes.Sort((a, b) => a.NoteNumber.CompareTo(b.NoteNumber));
                     break;
                 case "2":
-                    Notes.Sort((a, b) => a.RecordTime.CompareTo(b.RecordTime));
+                    notes.Sort((a, b) => a.RecordTime.CompareTo(b.RecordTime));
                     break;
                 case "3":
-                    Notes.Sort((a, b) => a.Status.CompareTo(b.Status));
+                    notes.Sort((a, b) => a.Status.CompareTo(b.Status));
                     break;
                 case "4":
-                    Notes.Sort((a, b) => a.Place.CompareTo(b.Place));
+                    notes.Sort((a, b) => a.Place.CompareTo(b.Place));
                     break;
                 case "5":
-                    Notes.Sort((a, b) => a.Text.CompareTo(b.Text));
+                    notes.Sort((a, b) => a.Text.CompareTo(b.Text));
                     break;
                 default:
-                    Console.WriteLine("Я бездельник ооооо мама мама.\n");
+                    Console.WriteLine("Я бездельник ооооо мама-мама.\n");
                     break;
             }
-
         }
-
-        public void PrintToSpecialDate(List<Note> Notes)
+        public void PrintToSpecialDate(List<Note> notes)
         {
-            Notes.Sort((a, b) => a.RecordTime.CompareTo(b.RecordTime));
+            notes.Sort((a, b) => a.RecordTime.CompareTo(b.RecordTime));
 
             Console.WriteLine("\nВведите диапазон дат, который хотите увидеть в формате: дд.мм.гггг");
-                Console.Write("Дата начала: ");
-                string StartTime = Console.ReadLine();
-                Console.WriteLine();
-                Console.Write("Дата окончания: ");
-                string EndTime = Console.ReadLine();
-                Console.WriteLine();
 
-            List<Note> CutNotes = new List<Note>();
+            Console.Write("Дата начала: ");
+            string startTime = Console.ReadLine();
+            Console.WriteLine();
 
-            int StartTimeIndex = Notes.FindIndex(e => e.RecordTime.ToString().Contains(StartTime));
-            int EndTimeIndex = Notes.FindLastIndex(e => e.RecordTime.ToString().Contains(EndTime));
+            Console.Write("Дата окончания: ");
+            string endTime = Console.ReadLine();
+            Console.WriteLine();
 
-            if (StartTimeIndex == -1 && EndTimeIndex == -1)
+            List<Note> cutNotes = new List<Note>();
+
+            int startTimeIndex = notes.FindIndex(e => e.RecordTime.ToString().Contains(startTime));
+            int endTimeIndex = notes.FindLastIndex(e => e.RecordTime.ToString().Contains(endTime));
+
+            if (startTimeIndex == -1 && endTimeIndex == -1)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\nТакой диапазон не найден, показаны все записи ежедневника\n");
                 Console.ResetColor();
-                Print(Notes);
+                Print(notes);
             }
-            else if (StartTimeIndex == -1 )
+            else if (startTimeIndex == -1)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\nДата начала не найдена в ежедневнике, поэтому показаны записи с начала\n");
                 Console.ResetColor();
-                CutNotes = Notes.GetRange(0, EndTimeIndex);
-                Print(CutNotes);
+                cutNotes = notes.GetRange(0, endTimeIndex);
+                Print(cutNotes);
             }
-            else if (EndTimeIndex == -1)
+            else if (endTimeIndex == -1)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\nДата окончания не найдена в ежедневнике, поэтому показаны записи до конца\n");
                 Console.ResetColor();
-                CutNotes = Notes.GetRange(StartTimeIndex, EndTimeIndex = Notes.Count - StartTimeIndex);
-                Print(CutNotes);
+                cutNotes = notes.GetRange(startTimeIndex, endTimeIndex = notes.Count - startTimeIndex);
+                Print(cutNotes);
             }
             else
             {
-                CutNotes = Notes.GetRange(StartTimeIndex, EndTimeIndex - StartTimeIndex + 1);
-                Print(CutNotes);
-            }     
+                cutNotes = notes.GetRange(startTimeIndex, endTimeIndex - startTimeIndex + 1);
+                Print(cutNotes);
+            }
         }
     }
 }

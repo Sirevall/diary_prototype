@@ -8,8 +8,8 @@ namespace Diary_prototype
 {
     public interface IFile
     {
-        List<Note> ReadFile(List<Note> Notes);
+        List<Note> ReadFile(List<Note> notes);
 
-        void WriteFile(List<Note> Notes);
+        void WriteFile(List<Note> notes);
     }
 }

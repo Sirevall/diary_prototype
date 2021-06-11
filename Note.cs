@@ -8,22 +8,18 @@ namespace Diary_prototype
         /// Порядковый номер заметки
         /// </summary>
         public int NoteNumber { get; set; }
-
         /// <summary>
         /// Время создания заметки
         /// </summary>
         public DateTime RecordTime { get; set; }
-
         /// <summary>
         /// Содержание заметки
         /// </summary>
         public string Text { get; set; }
-
         /// <summary>
         /// Местоположение при создании заметки
         /// </summary>
         public string Place { get; set; }
-
         /// <summary>
         /// Выполнена задача или нет
         /// </summary>
@@ -33,6 +29,5 @@ namespace Diary_prototype
         {
             (NoteNumber, RecordTime, Text, Place, Status) = (noteNumber, recordTime, text, place, status);
         }
-
     }
 }

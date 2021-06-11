@@ -11,26 +11,24 @@ namespace Diary_prototype
     class DiaryFile : IFile
     {
         string json;
+        string pathToFile = "DiaryData.json";
 
-        string PathToFile = "DiaryData.json";
-
-        public List<Note> ReadFile(List<Note> Notes)
+        public List<Note> ReadFile(List<Note> notes)
         {
-            if (!File.Exists(PathToFile)) File.Create(PathToFile).Close();
+            if (!File.Exists(pathToFile))
+                File.Create(pathToFile).Close();
 
-            json = File.ReadAllText(PathToFile);
+            json = File.ReadAllText(pathToFile);
 
             if (json != "")
-            {
-                Notes = JsonConvert.DeserializeObject<List<Note>>(json);
-            }
-            return Notes;
-        }
+                notes = JsonConvert.DeserializeObject<List<Note>>(json);
 
-        public void WriteFile(List<Note> Notes)
+            return notes;
+        }
+        public void WriteFile(List<Note> notes)
         {
-            json = JsonConvert.SerializeObject(Notes);
-            File.WriteAllText(PathToFile, json);
+            json = JsonConvert.SerializeObject(notes);
+            File.WriteAllText(pathToFile, json);
         }
     }
 }

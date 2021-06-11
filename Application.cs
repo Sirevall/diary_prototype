@@ -15,14 +15,13 @@ namespace Diary_prototype
         {
             this.file = file;
         }
-
         public void RunApp()
         {
             Diary diary = new Diary();
 
             List<Note> Notes = new List<Note>();
 
-            Notes = file.ReadFile(Notes);            
+            Notes = file.ReadFile(Notes);
 
             while (true)
             {
@@ -38,18 +37,32 @@ namespace Diary_prototype
 
                 switch (answer)
                 {
-                    case "1": diary.Print(Notes); break;
-                    case "2": diary.Add(Notes); break;
-                    case "3": diary.RemoveNote(Notes); break;
-                    case "4": diary.Edit(Notes); break;
-                    case "5": diary.Sort(Notes); break;
-                    case "6": diary.PrintToSpecialDate(Notes); break;
+                    case "1":
+                        diary.Print(Notes);
+                        break;
+                    case "2":
+                        diary.Add(Notes);
+                        break;
+                    case "3":
+                        diary.RemoveNote(Notes);
+                        break;
+                    case "4":
+                        diary.Edit(Notes);
+                        break;
+                    case "5":
+                        diary.Sort(Notes);
+                        break;
+                    case "6":
+                        diary.PrintToSpecialDate(Notes);
+                        break;
                     case "7":
                         Notes.Sort((a, b) => a.NoteNumber.CompareTo(b.NoteNumber));
                         file.WriteFile(Notes);
                         Environment.Exit(-1);
                         break;
-                    default: Console.WriteLine("\nЯ таки-та не разобралась...\n"); break;
+                    default:
+                        Console.WriteLine("\nЯ таки-та не разобралась...\n");
+                        break;
                 }
             }
         }

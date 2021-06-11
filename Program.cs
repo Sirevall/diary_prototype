@@ -13,7 +13,6 @@ namespace Diary_prototype
         static void Main(string[] args)
         {
             IFile diaryFile = new DiaryFile();
-
             Application app = new Application(diaryFile);
 
             app.RunApp();
